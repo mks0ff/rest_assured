@@ -1,52 +1,57 @@
 package com.apis.rest.test;
 
+import com.apis.rest.test.common.AcceptanceTest;
+import com.jersey.providers.NotFoundMapper;
+import com.jersey.providers.TodoServiceProvider;
+import com.jersey.resources.TodoResource;
+import com.sun.jersey.api.client.ClientResponse;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.jayway.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 /**
  * @author SLA
  * @version 1.0
  */
-public class TestRESTApi {
-
-    @Test
-    public void test_HTTP_GET() throws Exception {
-
-        String expected = "Not Found";
-
-        //given
-        given().baseUri("https://www.googleapis.com")
-
-        // when
-        .when().get("/urlshortener")
-
-        // verify
-        .then().statusCode(404)
-               .body(equalTo(expected));
-
+public class TestRESTApi extends AcceptanceTest
+{
+    @Override
+    protected String getResources() {
+        return TodoResource.class.getName() + ";" + TodoServiceProvider.class.getName() + ";" + NotFoundMapper.class.getName();
     }
 
     @Test
-    public void test_HTTP_POST() throws Exception {
+    public void testTodoOK() {
 
-        String json =   "{\n" +
-                        "  \"longUrl\": \"http://fitnesse.org/\"\n" +
-                        "}\n";
-
-        String expected = "http://goo.gl/CVOB";
+        final String todo = "toto";
 
         //given
-        given().contentType("application/json").baseUri("https://www.googleapis.com/urlshortener").body(json)
-
+        given()
+                .contentType("application/json")
+                .baseUri("http://localhost:9998")
+                .body(todo)
         // when
-        .when().post("/v1/url")
-
+        .when()
+                .post("/todo")
         // verify
-        .then().statusCode(200)
-               .body(containsString(expected));
+        .then()
+                .statusCode(204);
+
+        //given
+        given()
+                .baseUri("http://localhost:9998")
+                        // when
+        .when()
+                .get("/todo")
+                        // verify
+        .then()
+                .statusCode(200)
+                .body(containsString(todo));
 
     }
+
 }

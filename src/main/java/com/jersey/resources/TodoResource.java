@@ -1,7 +1,6 @@
 package com.jersey.resources;
 
 import com.jersey.services.TodoService;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;

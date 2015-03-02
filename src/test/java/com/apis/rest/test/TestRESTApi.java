@@ -4,11 +4,7 @@ import com.apis.rest.test.common.AcceptanceTest;
 import com.jersey.providers.NotFoundMapper;
 import com.jersey.providers.TodoServiceProvider;
 import com.jersey.resources.TodoResource;
-import com.sun.jersey.api.client.ClientResponse;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;

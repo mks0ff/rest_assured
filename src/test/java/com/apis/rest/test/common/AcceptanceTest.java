@@ -16,10 +16,8 @@ public abstract class AcceptanceTest extends JerseyTest {
     @Override
     protected WebAppDescriptor configure() {
         return new WebAppDescriptor.Builder()
-                .initParam(WebComponent.RESOURCE_CONFIG_CLASS,
-                        ClassNamesResourceConfig.class.getName())
-                .initParam(
-                        ClassNamesResourceConfig.PROPERTY_CLASSNAMES,getResources()).build();
+                .initParam(WebComponent.RESOURCE_CONFIG_CLASS,ClassNamesResourceConfig.class.getName())
+                .initParam(ClassNamesResourceConfig.PROPERTY_CLASSNAMES,getResources()).build();
     }
 
     @Override

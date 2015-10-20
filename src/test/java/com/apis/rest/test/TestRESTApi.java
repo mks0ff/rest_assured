@@ -13,8 +13,8 @@ import static org.hamcrest.Matchers.*;
  * @author SLA
  * @version 1.0
  */
-public class TestRESTApi extends AcceptanceTest
-{
+public class TestRESTApi extends AcceptanceTest {
+
     @Override
     protected String getResources() {
         return TodoResource.class.getName() + ";" + TodoServiceProvider.class.getName() + ";" + NotFoundMapper.class.getName();
@@ -24,30 +24,24 @@ public class TestRESTApi extends AcceptanceTest
     public void testTodoOK() {
 
         final String todo = "toto";
-
-        //given
+        // --
         given()
                 .contentType("application/json")
                 .baseUri("http://localhost:9998")
                 .body(todo)
-        // when
-        .when()
+                .when()
                 .post("/todo")
-        // verify
-        .then()
+                .then()
                 .statusCode(204);
 
-        //given
+        // --
         given()
                 .baseUri("http://localhost:9998")
-                        // when
-        .when()
+                .when()
                 .get("/todo")
-                        // verify
-        .then()
+                .then()
                 .statusCode(200)
                 .body(containsString(todo));
-
     }
 
 }

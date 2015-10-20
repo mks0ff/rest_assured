@@ -11,8 +11,7 @@ import javax.ws.rs.ext.Provider;
  * @version 1.0
  */
 @Provider
-public class NotFoundMapper implements ExceptionMapper<TodoNotFoundException>
-{
+public class NotFoundMapper implements ExceptionMapper<TodoNotFoundException> {
     @Override
     public Response toResponse(TodoNotFoundException e) {
         return Response.status(Response.Status.BAD_REQUEST).entity("TodoNotFoundException").build();

@@ -11,8 +11,7 @@ import javax.ws.rs.ext.Provider;
  * @version 1.0
  */
 @Provider
-public class TodoServiceProvider extends SingletonTypeInjectableProvider<Context, TodoService>
-{
+public class TodoServiceProvider extends SingletonTypeInjectableProvider<Context, TodoService> {
     public TodoServiceProvider() {
         super(TodoService.class, new TodoService());
     }
